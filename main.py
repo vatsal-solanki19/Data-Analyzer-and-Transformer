@@ -1,37 +1,171 @@
-print("Welcome to the Data Analyzer and Transformer Program")
-print()
+def input_data():
+    global data
+    print("")
+    print("1. For 1D array")
+    print("2. For 2D array")
+
+    choice = int(input("Enter the choice: "))
+
+    if choice == 1:
+        num= input("Enter the numbers with separated by spaces: ").split()
+        data = list(map(int, num))
+        print("Data has been stored successfully.")
+
+    elif choice == 2:
+        rows = int(input("Enter the number of rows: "))
+        columns = int(input("Enter the number of columns: "))
+
+        for i in range(rows):
+            a=[]
+            for j in range(columns):
+                num = int(input("Enter the number: "))
+
+                data.append(a)
+            print("Added successfully.")
+
+    else:
+        print("Invalid input")
+
+
+def summary(data):
+
+    if len(data) > 0:
+        for i in data:
+            if type(i) == list:
+                data.extend(i)
+            else:
+                data.append(i)
+
+        print("Data Summary")
+        print("Total elements:", len(data))
+        print("Minimum value is:", min(data))
+        print("Maximum value is:", max(data))
+        print("Sum of all values is:", sum(data))
+        print("The average is:", sum(data) / len(data))
+
+    else:
+        print("No data available")
+
+
+def fact(num):
+    if num <= 1:
+        return 1
+
+    return num * fact(num - 1)
+
+
+def factorial():
+    num = int(input("Enter the number: "))
+
+    fact = fact(num)
+
+    print(f"Factorial of {num} is {fact}")
+
+
+def threshold(data):
+    
+    for i in data:
+        if type(i) == list:
+            data.extend(i)
+        else:
+            data.append(i)
+
+    threshold = int(input("Enter the threshold value to filter out data above this value: "))
+
+    threshold_val = list(filter(lambda x: x > threshold, data))
+
+    print(f"Values greater than threshold are:{threshold}")
+
+
+def sorting(data):
+    for i in data:
+        if type(i) == list:
+            data.extend(i)
+        else:
+            data.append(i)
+
+    print("Select an option:")
+    print("1. Ascending")
+    print("2. Descending")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+        data.sort()
+        print(data)
+
+    elif choice == 2:
+        data.sort(reverse=True)
+        print(data)
+
+    else:
+        print("Invalid choice")
+
+
+def calculate_data(data):
+    for i in data:
+        if type(i) == list:
+            data.extend(i)
+        else:
+            data.append(i)
+
+    total = len(data)
+    sum = sum(data)
+    minimum = min(data)
+    maximum = max(data)
+    avg = sum / total
+
+    return total,sum, minimum, maximum, avg
+
+
+def statistics(data):
+    sum, minimum, maximum, avg = calculate_data(data)
+
+    print("Sum:", sum)
+    print("Minimum:", minimum)
+    print("Maximum:", maximum)
+    print("Average:", avg)
+
 
 data = []
 
-def input_data():
-    global data
-    arr = input("Enter data for a 1D array (separated by spaces): ")
-
-    for x in arr.split():
-        data.append(x)
-        data = list(map(int, arr.split()))
-
-    print("Data has been stored successfully!")
-
-
-def summary():
-    total = sum(data)
-
-    print("Data summary:")
-    print("- Total elements: ", len(data))
-    print("- Minimum value: ", min(data))
-    print("- Maximum value: ", max(data))
-    print("- Sum of all values: ", sum(data))
-    print("- Average value: ", total / len(data))
+while True:
     print()
+    print("Welcome to the Data Analyzer and Transformer program")
+    print("1. Input Data")
+    print("2. Display Data Summary")
+    print("3. Calculate Factorial")
+    print("4. Threshold Value")
+    print("5. Sorting Data")
+    print("6. Statistics Data")
+    print("7. Exit")
 
+    choice = int(input("Enter your choice: "))
 
-def factorial(n):
-    if n <= 0:
-        return 1
+    if choice == 1:
+        input_data()
+
+    elif choice == 2:
+        summary(data)
+
+    elif choice == 3:
+        factorial()
+
+    elif choice == 4:
+        threshold(data)
+
+    elif choice == 5:
+        sorting(data)
+
+    elif choice == 6:
+        statistics(data)
+
+    elif choice == 7:
+        print("Thank you for using system.")
+        break
+
     else:
-        return n*factorial(n-1)
-
+        print("Invalid choice")
 
 def filter_data():
     v = int(input("Enter a threshold value to filter out data above this value: "))
